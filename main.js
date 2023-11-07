@@ -1,15 +1,17 @@
-let overlay = document.getElementById("overlay");
-let vid = document.getElementById("mainVideo");
-let source = document.getElementById("source");
+const overlay = document.getElementById("overlay");
+const vid = document.getElementById("mainVideo");
+const source = document.getElementById("source");
 
-let playbtn = document.getElementById("play");
+const playbtn = document.getElementById("play");
+
+const clipMain = ["TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4"];
+
+const clipEnd = ["TestFolder/2023-11-06_21-39-13.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4"];
+
+const title = ["Prologue", "Ryan", "Ali", "Ana", "Siso", "Ending", "True Ending"];
 
 let progress = 0;
 let chosen = 0;
-
-let clipMain = ["TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4"];
-
-let clipEnd = ["TestFolder/2023-11-06_21-39-13.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4"];
 
 function playVid() {
     vid.play();
@@ -45,7 +47,7 @@ function previousVid() {
 }
 
 function progression() {
-    document.getElementById("counter").innerHTML = progress;
+    document.getElementById("title").innerHTML = title[progress];
 }
 
 
