@@ -19,30 +19,40 @@ video, #overlay {
 
 #overlay {
     background-color: transparent !important;
+    color: white;
     position: absolute;
     z-index: 1;
     left: 0;
     top: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+#overlay * {
+    position: relative;
+}
+
+#counter {
+    position: absolute;
+    width: fit-content;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 #play {
     background-color: rgba(255, 255, 255, 0.461);
-    cursor: default;
-    position: relative;
+    align-self: center;
     width: 20rem;
     height: 20rem;
+    margin: auto;
     border: none;
     border-radius: 100%;
 }
 
-#play:hover {
+#overlay:hover #play {
     background-color: rgb(255, 255, 255);
-    cursor: pointer;
 }
 
 #play img {
     width: 100%;
+    display: block;
 }

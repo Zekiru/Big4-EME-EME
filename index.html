@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="images/play_button.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" type="text/css" href="style.css">
+
     <title>Big 4</title>
 </head>
 <body>
     <video id="mainVideo">
-        <source src="TestFolder/8u19e23.mp4">
+        <source id="source">
     </video>
 
     <div id="overlay">
-        <button id="play" onclick="playVid();">
+        <p id="counter"></p>
+        <button id="play">
             <img src="images/play_button.png">
         </button>
     </div>
