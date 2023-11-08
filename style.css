@@ -39,18 +39,48 @@ video, #overlay {
     font-size: 5vb;
 }
 
+#navigation {
+    position: absolute;
+    top: 10vh;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    width: 100vw;
+}
+
+#navigation * {
+    width: 10rem;
+    height: 10rem;
+    font-size: 2rem;
+    border-radius: 100%;
+}
+
+#back {
+    float: left;
+    margin: 0 auto 0 2rem;
+}
+
+#forward {
+    float: right;
+    margin: 0 2rem 0 auto;
+}
+
 #play {
-    background-color: rgba(255, 255, 255, 0.461);
     align-self: center;
     width: 20rem;
     height: 20rem;
     margin: auto;
-    border: none;
-    border-radius: 100%;
 }
 
-#overlay:hover #play {
+#play, #navigation * {
+    background-color: rgba(255, 255, 255, 0.461);
+    cursor: default;
+    border-radius: 100%;
+    border: none;
+}
+
+#play:hover, #navigation *:hover:not([disabled]) {
     background-color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 #play img {
