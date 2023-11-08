@@ -29,12 +29,13 @@ const clipEnd = [
 
 const title = ["Prologue", "Ryan", "Ali", "Ana", "Siso", "Ending", "True Ending"];
 
-const decision = [
+const options = [
     ["A", "B"],
     ["C", "D"],
     ["E", "F"],
     ["G", "H"]
 ];
+
 
 let playback = false;
 let navHover = false;
@@ -43,12 +44,14 @@ let decoverHover = false;
 let decisionprompt = false;
 
 let progress = 0;
-let chosen = 0;
+let decision = 0;
+
+let decisionarray = [0, 0, 0, 0];
+
 
 function toggleDecision(status) {
     if (progress <= 0) return;
 
-    playback = false;
     if (status) {
         pauseVid();
         playbtn.setAttribute("hidden", "");
@@ -57,46 +60,48 @@ function toggleDecision(status) {
         choice2.removeAttribute("hidden");
         decisionprompt = false;
 
-        choice1.innerHTML = decision[progress-1][0];
-        choice2.innerHTML = decision[progress-1][1];
+        choice1.innerHTML = options[progress-1][0];
+        choice2.innerHTML = options[progress-1][1];
     } else {
-        forwardbtn.removeAttribute("disabled");
+        // forwardbtn.removeAttribute("disabled");
         choice1.setAttribute("hidden", "");
         choice2.setAttribute("hidden", "");
     }
 }
 
-function chosenInit(prime) {
+function decisionInit(prime) {
     switch(progress) {
         case 1:
-            chosen = 1;
+            decision = 1;
             break;
         case 2:
-            chosen = 3;
+            decision = 3;
             break;
         case 3:
-            chosen = 5;
+            decision = 5;
             break;
         case 4:
-            chosen = 7;
+            decision = 7;
             break;
         default:
             break;
     };
 
     if (!prime) {
-        chosen += 1;
+        decision += 1;
     };
+
+    decisionarray[progress - 1] = decision;
 }
 
 choice1.addEventListener("click", () => {
-    chosenInit(true);
+    decisionInit(true);
     toggleDecision(false);
     nextVid();
 });
 
 choice2.addEventListener("click", () => {
-    chosenInit(false);
+    decisionInit(false);
     toggleDecision(false);
     nextVid();
 });
@@ -116,18 +121,19 @@ function nextVid() {
         toggleDecision(true);
         return;
     } else {
+        // console.log(decisionarray);
         progress += 1;
         toggleDecision(false);
     };
 
     if (progress >= 5) {
-        if (chosen == 0) {
-            console.log("good ending");
+        if (decision == 0) {
+            console.log("Ending: 1/9");
             progress += 1;
         } else {
-            console.log("bad ending");
+            console.log("Ending: " + (decision + 1) + "/9");
         };
-        vidLoader(clipEnd[chosen]);
+        vidLoader(clipEnd[decision]);
         toggleDecision(false);
         navigation.setAttribute("hidden", "");
         return;
@@ -138,19 +144,25 @@ function nextVid() {
 }
 
 function previousVid() {
+    if (progress <= 1 && decisionprompt) backbtn.setAttribute("disabled", "");
     if (progress <= 0) return;
     if (decisionprompt) {
         progress -= 1;
-        vidLoader(clipMain[progress]);
+        source.setAttribute("src", clipMain[progress]);
+        vid.load();
+        if (progress  == 0) vid.play();
+        progression();
         toggleDecision(true);
         decisionprompt = false;
-        return
+        if (progress != 1) decision = decisionarray[progress - 2]
+        else decision = 0;
+        return;
     } else {
+        // console.log(decisionarray);
         toggleDecision(false);
         decisionprompt = true;
     };
     vidLoader(clipMain[progress]);
-    if(progress <= 0) backbtn.setAttribute("disabled", "");
 }
 
 function progression() {
@@ -173,7 +185,7 @@ vid.addEventListener("ended", () => {
 
 overlay.addEventListener("click", () => {
     if (!vid.paused) playback = true;
-    if (progress >= 5 && vid.ended || !playback || navHover || decoverHover || decisionprompt) return;
+    if (progress >= 5 && vid.ended || !playback || navHover || decoverHover) return;
 
     if (!source.hasAttribute("src")) {
         vidLoader(clipMain[progress]);
