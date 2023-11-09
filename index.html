@@ -8,22 +8,26 @@
     <title>Big 4 EME-EME</title>
 </head>
 <body>
-    <video id="mainVideo">
-        <source id="source">
-    </video>
+    <div id="menu">
+        <p id="title">THE BIG 4: EME-EME</p>
+    </div>
+    <div id="navigation">
+        <button id="back" disabled>Back</button>
+        <button id="forward">Skip</button>
+    </div>
     <div id="overlay">
-        <p id="title"></p>
+        <video id="mainVideo">
+            <source id="source">
+        </video>
         <div id="decision-overlay">
             <button id="choice1" hidden></button>
             <button id="choice2" hidden></button>
         </div>
-        <div id="navigation">
-            <button id="back" disabled>Back</button>
-            <button id="forward">Skip</button>
+        <div id="playbox">
+            <button id="play">
+                <img src="images/play_button.png">
+            </button>
         </div>
-        <button id="play">
-            <img src="images/play_button.png">
-        </button>
     </div>
     <script src="main.js"></script>
 </body>

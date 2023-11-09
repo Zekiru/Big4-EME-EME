@@ -12,28 +12,34 @@ const choice1 = document.getElementById("choice1");
 const choice2 = document.getElementById("choice2");
 
 const clipMain = [
-    "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4"
+    "assets/main/0.mov",
+    "assets/main/1.mov",
+    "assets/main/2.mov",
+    "assets/main/3.mov",
+    "assets/main/4.mov"
 ];
 
 const clipEnd = [
-    "TestFolder/2023-11-06_21-39-13.mp4",
-    "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4",
-    "TestFolder/maxverstappen.mp4", "TestFolder/maxverstappen.mp4"
+    "assets/endings/true-end.mov",
+    "assets/endings/ali/A.mov", "assets/endings/ali/B.mov",
+    "assets/endings/ryan/A.mov", "assets/endings/ryan/B.mov",
+    "assets/endings/ana/A.mov", "assets/endings/ana/B.mov",
+    "assets/endings/siso/A.mov", "assets/endings/siso/B.mov"
 ];
 
-const title = ["Prologue", "Ryan", "Ali", "Ana", "Siso", "Ending", "True Ending"];
+const title = ["Prologue", "Ali", "Ryan", "Ana", "Siso", "Ending", "True Ending"];
+const optiontitle = [
+    "Dapat ba si Ali ang magiging leader ng grupo?",
+    "Pipiliin ba ni Ryan at ng kanyang grupo ang tradisyonal o eksperimental na art form?",
+    "Ano ang kailangan ni Ana gawin?",
+    "Sasali pa kaya si Siso sa art competition?"
+];
 
 const options = [
-    ["A", "B"],
-    ["C", "D"],
-    ["E", "F"],
-    ["G", "H"]
+    ["Oo", "Hindi"],
+    ["Tradisyonal", "Eksperimental"],
+    ["Manatili sa kanyang art style", "Ibahin ang gawa niya"],
+    ["Oo", "Hindi"]
 ];
 
 
@@ -119,6 +125,7 @@ function pauseVid() {
 function nextVid() {
     if (decisionprompt) {
         toggleDecision(true);
+        document.getElementById("title").innerHTML = optiontitle[progress - 1];
         return;
     } else {
         // console.log(decisionarray);
@@ -135,7 +142,9 @@ function nextVid() {
         };
         vidLoader(clipEnd[decision]);
         toggleDecision(false);
-        navigation.setAttribute("hidden", "");
+        navigation.setAttribute("style", "display:none;");
+        navigation.setAttribute("disabled", "");
+        overlay.setAttribute("style", "position: absolute; top: 20vh;")
         return;
     };
     decisionprompt = true;
@@ -156,6 +165,7 @@ function previousVid() {
         decisionprompt = false;
         if (progress != 1) decision = decisionarray[progress - 2]
         else decision = 0;
+        if (progress > 0) document.getElementById("title").innerHTML = optiontitle[progress - 1];
         return;
     } else {
         // console.log(decisionarray);
@@ -243,5 +253,5 @@ forwardbtn.addEventListener("click", () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    progression();
+    // progression();
 });

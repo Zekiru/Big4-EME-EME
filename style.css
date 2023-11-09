@@ -1,6 +1,6 @@
 html {
     background-color: black;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 body {
@@ -8,50 +8,52 @@ body {
 }
 
 video {
-    z-index: 0;
-}
-
-video, #overlay {
     background-color: black;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    z-index: -1;
+    display: block;
 }
 
 #overlay {
     background-color: transparent !important;
     color: white;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    left: 0;
-    top: 0;
+    width: 100vw;
+    height: 70vh;
     display: flex;
 }
 
-#overlay * {
+#menu {
     position: relative;
+    width: 100vw;
+    font-size: 2rem;
+    z-index: 2;
 }
 
 #title {
-    position: absolute;
-    width: fit-content;
-    padding: 1rem;
-    margin: 1rem;
-    font-size: 5vb;
+    padding: 2vh 2vw;
+    margin: 0;
+    color: white;
+    background-color: rgb(21, 47, 141);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
 }
 
 #navigation {
-    position: absolute;
-    top: 10vh;
-    padding: 1rem 0;
-    margin: 1rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 2vh 0;
     width: 100vw;
+    height: fit-content;
+    z-index: 3;
 }
 
 #navigation * {
-    width: 8rem;
-    height: 8rem;
-    font-size: 2rem;
-    border-radius: 100%;
+    padding: 1rem 5vw;
+    font-size: 4vh;
+    border-radius: 1rem;
 }
 
 #back {
@@ -64,18 +66,31 @@ video, #overlay {
     margin: 0 2rem 0 auto;
 }
 
+#playbox {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
 #play {
-    align-self: center;
-    width: 20rem;
-    height: 20rem;
-    margin: auto;
+    position: relative;
+    width: 20vmax;
+    height: 20vmax;
+    border-radius: 100%;
+    z-index: 2;
 }
 
 #play, #navigation * {
     background-color: rgba(255, 255, 255, 0.461);
     cursor: default;
-    border-radius: 100%;
     border: none;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
 }
 
 #play:hover, #navigation *:hover:not([disabled]) {
@@ -94,24 +109,33 @@ video, #overlay {
     display: flex;
     bottom: 0;
     width: 100vw;
-
+    z-index: 3;
 }
 
 #decision-overlay * {
-    background-color: rgba(255, 255, 255, 0.237);
-    border: 1rem solid rgba(0, 0, 0, 0.476);
+    background-color: rgba(126, 134, 147, 0.655);
+    border: none;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
     color: white;
-    font-size: 3rem;
+    font-size: 3vmax;
     border-radius: 1rem;
     cursor: default;
     padding: 0;
     margin: 0;
-    width: 50vw;
+    width: 45vw;
     height: 33vh;
 }
 
+#choice1 {
+    margin: 0 auto 0 4vw;
+}
+
+#choice2 {
+    margin: 0 4vw 2vh auto;
+}
+
 #decision-overlay *:hover {
-    background-color: rgba(255, 255, 255, 0.487);
-    border: 1rem solid rgba(0, 0, 0, 0.165);
+    background-color: rgba(190, 190, 190, 0.765);
+    color: black;
     cursor: pointer;
 }
